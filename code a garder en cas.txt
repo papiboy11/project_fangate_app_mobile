@@ -1,0 +1,143 @@
+import 'package:flutter/material.dart';
+
+class LoginScreen extends StatelessWidget {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(100), // Hauteur de l'AppBar
+        child: ClipPath(
+          clipper: WaveClipper(), // Utilisation du ClipPath pour la courbe
+          child: AppBar(
+            backgroundColor: Colors.green, // Couleur de fond de l'AppBar
+            elevation: 0, // Pour éviter l'ombre sous l'AppBar
+            //title: Text('Inscription'),
+            centerTitle: true,
+          ),
+        ),
+      ),
+      backgroundColor: Colors.white,
+
+      body: SingleChildScrollView(  // Utilise un SingleChildScrollView pour permettre le défilement
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0), // Retirer le padding top
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,  // Aligne tout le contenu vers le haut
+            children: [
+              // Titre "Connexion"
+              SizedBox(height: 80),  // Ajuste la hauteur du vide si nécessaire
+              Text(
+                "Connexion",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 5),
+              // Sous-titre
+              Text(
+                "Bienvenue, connecte-toi pour continuer",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 30),
+
+              // Champ E-mail
+              buildInputField("E-mail", _emailController, false, Icons.email, TextInputType.emailAddress),
+
+              // Champ Mot de Passe
+              buildInputField("Mot de Passe", _passwordController, true, Icons.lock),
+
+              const SizedBox(height: 20),
+
+              // Bouton "Se connecter"
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Action de connexion
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                  ),
+                  child: const Text(
+                    "Se connecter",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // Fonction pour créer un champ de saisie avec une icône
+  Widget buildInputField(String hintText, TextEditingController controller, bool isPassword, IconData icon, [TextInputType keyboardType = TextInputType.text]) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      decoration: BoxDecoration(
+        color: Colors.green.shade100,
+        borderRadius: BorderRadius.circular(30),
+        //border: Border.all(color: Colors.green),
+      ),
+      child: TextFormField(
+        controller: controller,
+        obscureText: isPassword,
+        keyboardType: keyboardType,
+        decoration: InputDecoration(
+          prefixIcon: Icon(icon, color: Colors.green, size: 24,), // Ajout de l'icône
+          hintText: hintText,
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(vertical: 18), // Ajustement vertical
+        ),
+      ),
+    );
+  }
+}
+
+
+// Classe pour la courbe Bézier de l'AppBar
+class WaveClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    Path path = Path();
+
+    path.lineTo(0, 0);
+    path.lineTo(0, size.height - 30);
+
+    // Courbe Bézier
+    path.quadraticBezierTo(
+      size.width / 4, size.height, // Point de contrôle
+      size.width / 2, size.height - 50, // Point final de la courbe
+    );
+
+    path.quadraticBezierTo(
+      3 * size.width / 4, size.height - 100, // Deuxième courbe
+      size.width, size.height - 30,
+    );
+
+    path.lineTo(size.width, 0);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    return false;
+  }
+}
