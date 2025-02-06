@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 //import 'package:intl/date_symbol_data_local.dart';
 
+import 'introPage//intro.dart';
 import 'pages/inscription.dart';
 import 'pages/connexion.dart';
 import 'pages/home_page.dart'; // Import de la page d'accueil
@@ -31,8 +32,8 @@ class MyApp extends StatelessWidget {
         Locale('fr', 'FR'), // ✅ Définit le français comme langue principale
       ],
 
-
-      home: SignUpScreen(),
+      home: IntroPage(),
+      //home: SignUpScreen(),
       //home: LoginScreen(),
       //home: HomePage(),
       debugShowCheckedModeBanner: false,
