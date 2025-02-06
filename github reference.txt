@@ -1,0 +1,23 @@
+✅ Mettre à jour ton projet sur GitHub après des modifications
+git status (verification des fihciers)
+git add . (Ajoute tous les fichiers modifiés pour qu'ils soient suivis par Git )
+git commit -m "Description des modifications" (Créer un commit avec un message explicatif)
+git push origin main (Pousser les modifications vers GitHub)
+
+✅ Pour qu'un collaborateur recoive le projet il faut faire
+git clone https://github.com/papiboy11/project_fangate_app_mobile.git (Cloner le projet sur son PC)
+cd project_fangate_app_mobile ( Vérifier les fichiers modifiés)
+git add . (Ajouter les fichiers modifiés )
+git commit -m "Modification sur [feature]" (Faire un commit)
+git pull origin main (Récupérer les mises à jour avant d'envoyer (éviter les conflits))
+
+✅ Pour qu'un collaborateur envoie sa modification du projet il faut faire
+git push origin main ( Envoyer son travail sur GitHub)
+
+
+
+
+
+
+
+
