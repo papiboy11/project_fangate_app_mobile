@@ -15,7 +15,12 @@ git pull origin main (Récupérer les mises à jour avant d'envoyer (éviter les
 git push origin main ( Envoyer son travail sur GitHub)
 
 
-
+✅ Pour envoyer des dossiers volumineux sur github
+git lfs install
+git lfs track "*.psd"  # Exemple pour suivre des fichiers .psd
+git add .gitattributes
+git commit -m "Ajout de fichiers lourds avec Git LFS"
+git push origin main
 
 
 
