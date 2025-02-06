@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final String userName = "Cheikhoul"; // Nom de l'utilisateur (à récupérer de Firebase plus tard)
+  //final String userName = "Cheikhoul"; // Nom de l'utilisateur (à récupérer de Firebase plus tard)
 
   final List<Widget> _pages = [
     HomeScreen(),

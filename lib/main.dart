@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+//import 'package:intl/date_symbol_data_local.dart';
 
 import 'pages/inscription.dart';
 import 'pages/connexion.dart';
@@ -19,9 +21,20 @@ class MyApp extends StatelessWidget {
         colorSchemeSeed: Colors.lightGreen, // Couleur principale
         scaffoldBackgroundColor: Colors.white,
       ),
-      //home: SignUpScreen(),
+
+      localizationsDelegates: [ // ✅ Ajoute ces lignes pour la localisation
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('fr', 'FR'), // ✅ Définit le français comme langue principale
+      ],
+
+
+      home: SignUpScreen(),
       //home: LoginScreen(),
-      home: HomePage(),
+      //home: HomePage(),
       debugShowCheckedModeBanner: false,
     );
   }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:intl/intl.dart'; // Import pour la localisation
+import 'package:intl/date_symbol_data_local.dart';
+
 import 'connexion.dart'; // Assure-toi d'avoir cette page pour la redirection
+
 
 
 class SignUpScreen extends StatefulWidget {
@@ -9,6 +13,15 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+
+  // PERMET DE TRANSFORMER LE CANLENDRIER EN FRANCAIS
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('fr', null); // Initialisation pour le français
+  }
+
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _nameController = TextEditingController();
@@ -86,7 +99,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Text(
                           _selectedDate == null
                               ? "Date de naissance"
-                              : "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
+                              //: "${_selectedDate!.day}/${_selectedDate!.month}/${_selectedDate!.year}",
+                              : DateFormat('dd MMMM yyyy', 'fr').format(_selectedDate!),
                           style: const TextStyle(fontSize: 16, color: Colors.black54),
                         ),
                       ],
@@ -175,13 +189,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // Fonction pour sélectionner une date
   Future<void> _selectDate(BuildContext context) async {
-
-
     DateTime? picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+      locale: const Locale('fr', 'FR'), // ✅ Définit le calendrier en français
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -193,12 +206,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       },
     );
+
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
       });
     }
   }
+
 }
 
 // Classe pour la courbe Bézier de l'AppBar
